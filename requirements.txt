@@ -1,0 +1,4 @@
+python-telegram-bot==20.7
+yt-dlp==2024.12.13
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
