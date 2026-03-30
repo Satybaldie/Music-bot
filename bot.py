@@ -23,7 +23,6 @@ user_data_store = {}
 # ---------- 2. Функция скачивания и отправки аудио ----------
 async def download_and_send_audio(update: Update, context: ContextTypes.DEFAULT_TYPE, url: str, title: str):
     try:
-        # Создаём временный файл
         with tempfile.NamedTemporaryFile(prefix="music_", suffix=".mp3", delete=False) as tmp:
             tmp_name = tmp.name
 
@@ -43,7 +42,6 @@ async def download_and_send_audio(update: Update, context: ContextTypes.DEFAULT_
             ydl.download([url])
             actual_filename = tmp_name + '.mp3'
             if not os.path.exists(actual_filename):
-                # пробуем другие варианты
                 actual_filename = tmp_name.replace('.mp3', '.mp3')
             with open(actual_filename, 'rb') as audio_file:
                 await update.message.reply_audio(
@@ -88,7 +86,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("Сначала поищи музыку 🎧")
     else:
-        # Поиск
         query = text
         ydl_opts = {'format': 'bestaudio', 'quiet': True}
         try:
